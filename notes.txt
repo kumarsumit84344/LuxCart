@@ -1,0 +1,9 @@
+Primary: #1E1E2F (Dark Blue-gray)
+
+Secondary: #A0AEC0 (Cool gray)
+
+Accent: #F4B400 (Gold)
+
+Background: #F7FAFC
+
+Text: #2D3748
