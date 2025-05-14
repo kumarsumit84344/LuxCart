@@ -40,9 +40,9 @@ function ProductDetails() {
       <ul className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 pt-24">
         {product.length > 0 ? (
           product.map((p) => (
-            <li key={p.id} className="bg-white shadow-md p-4 rounded-lg border border-gray-200">
-              <img src={p.images[0]} alt={p.title} className="w-full h-60 object-cover rounded-md mb-2" />
-              <h2 className="text-lg font-semibold">{p.title}</h2>
+            <li key={p.id} className="bg-white shadow-md p-4 rounded-lg border border-gray-200 flex flex-col justify-between h-full">
+              <img src={p.images[0]} alt={p.title} className="w-full h-40 sm:h-30 md:h-30 object-cover rounded-md mb-2" />
+              <h2 className="text-sm sm:text-base md:text-lg font-semibold">{p.title}</h2>
               {/* {p.description.length > 100 ? p.description.slice(0, 100) + "..." : p.description} */}
               <p className="text-accent font-bold mt-2">
   ₹{Math.round(p.price * 83).toLocaleString('en-IN')}
