@@ -7,20 +7,29 @@ import Login from './pages/login';
 import Register from './pages/register';
 import NotFound from './pages/notFound';
 import ProductDetails from './pages/productDetails';
-
+import ProtectedRoute from './Routes/route';
+import Footer from './components/footer';
 
 function App() {
   return (
     <Router>
+      <Header /> {/* This goes outside Routes */}
       <Routes>
-        <Route path='/' element={<Home/>}/>
-        <Route path='/login' element={<Login/>}/>
-        <Route path='/register' element={<Register/>}/>
-        <Route path='/productdetails' element={<ProductDetails/>}/>
-        <Route path='*' element={<NotFound/>}/>
+        <Route path='/' element={<Home />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/register' element={<Register />} />
+        <Route
+          path='/productdetails'
+          element={
+            <ProtectedRoute>
+              <ProductDetails />
+            </ProtectedRoute>
+          }
+        />
+        <Route path='*' element={<NotFound />} />
       </Routes>
+      <Footer/>
     </Router>
-    
   );
 }
 

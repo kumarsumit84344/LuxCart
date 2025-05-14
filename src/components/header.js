@@ -1,21 +1,79 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { setlogout } from '../features/authSlicer';
+import { useNavigate } from 'react-router-dom';
 
 function Header() {
+  const name = useSelector((state) => state.auth.name);
+  const isloggin = useSelector((state) => state.auth.isloggin);
+  const dispatch= useDispatch();
+  const navigate = useNavigate();
+  console.log(name)
+  
+  const handleLogout = () => {
+    dispatch(setlogout());
+    navigate("/login"); // Or redirect to homepage
+  };
+
+  const handleLogin=()=>{
+    navigate("/login")
+  }
+
+  const handleRegister=()=>{
+    navigate("/register")
+  }
+
   return (
-    <header className="bg-[#1E1E2F] text-[#F7FAFC] p-6 flex justify-between items-center shadow-md">
-      <div className="text-2xl font-bold tracking-wide">LuxCart</div>
-      <div className="space-x-4">
-      <Link to="/login" className="bg-[#F4B400] text-[#1E1E2F] font-medium px-4 py-2 rounded hover:opacity-90 transition">
-        Login
-      </Link>
-        
-      <Link to="/register" className="border border-[#F4B400] text-[#F4B400] px-4 py-2 rounded hover:bg-[#F4B400] hover:text-[#1E1E2F] transition">
-        Register
-      </Link>
-        
+    <div className="fixed top-0 left-0 w-full z-50 bg-[#F7FAFC] px-6 py-4 shadow-md mb-6">
+  <div className="flex items-center justify-between">
+    {/* Brand */}
+    <div>
+      <h1 className="text-4xl font-extrabold tracking-wide text-[#1E1E2F]">
+        <span className="text-[#F4B400]">LuX</span>
+        <span className="text-[#2D3748]">Cart</span>
+      </h1>
+      <p className="text-sm text-[#A0AEC0] mt-1 italic">Style meets comfort</p>
+    </div>
+
+    {/* User Info and Logout */}
+    <div className="flex items-center space-x-4">
+      {/* User Avatar and Name */}
+      <div className="flex items-center space-x-2">
+        {isloggin && <img
+          src="https://i.pravatar.cc/40" // Replace with user's avatar if available
+          alt="User Avatar"
+          className="w-10 h-10 rounded-full"
+        />}
+      <span className="text-[#2D3748] font-bold uppercase tracking-wider text-sm">{name}</span>
       </div>
-    </header>
+
+      {!isloggin && <button
+        onClick={handleLogin} // define this function
+        className="bg-[#F4B400] text-white px-4 py-2 rounded hover:bg-yellow-500 transition"
+      >
+        Login
+      </button>}
+      
+      {isloggin && <button
+        onClick={handleLogout} // define this function
+        className="bg-[#F4B400] text-white px-4 py-2 rounded hover:bg-yellow-500 transition"
+      >
+        Logout
+      </button>}
+      
+      {!isloggin &&  <button
+        onClick={handleRegister} // define this function
+        className="bg-[#F4B400] text-white px-4 py-2 rounded hover:bg-yellow-500 transition"
+      >
+        Register
+      </button>}
+     
+    </div>
+  </div>
+</div>
+
   );
 };
 

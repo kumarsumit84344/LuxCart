@@ -3,8 +3,12 @@ import { AiOutlineWarning } from "react-icons/ai";
 import { AiOutlineCheckCircle } from "react-icons/ai";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
+import { useDispatch} from "react-redux";
+import { setlogin, setname } from "../features/authSlicer";
+import { computeHeadingLevel } from "@testing-library/dom";
 
 function Login() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
@@ -24,10 +28,14 @@ function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const username = localStorage.getItem("username");
-    const getpassword = localStorage.getItem("password");
-    if (user == username && password == getpassword) {
+    const storedUserData = JSON.parse(localStorage.getItem('userdata'));
+    console.log(storedUserData.user,storedUserData.password)
+    console.log(user,password)
+    if (user == storedUserData.username&& password == storedUserData.password) {
+      dispatch(setlogin(user))
+      dispatch(setname(storedUserData.name))
       setloginSuccess("login successfull");
+
       navigate("/productdetails");
     } else {
       setloginError("Invalid Credential");

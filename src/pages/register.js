@@ -4,6 +4,7 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
 function Register() {
     const navigate = useNavigate()
+  const [name,setname]=useState("")
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -14,6 +15,9 @@ function Register() {
     setUser(e.target.value);
     
   };
+  const handleUserName =(e)=>{
+    setname(e.target.value)
+  }
 
   const handleUserPassword = (e) => {
     setPassword(e.target.value);
@@ -21,8 +25,12 @@ function Register() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    localStorage.setItem("username", user);
-    localStorage.setItem("password", password);
+    const userData ={
+      name:name,
+      username:user,
+      password:password
+    }
+    localStorage.setItem('userdata',JSON.stringify(userData));
     navigate('/login')
   };
 
@@ -31,6 +39,18 @@ function Register() {
       <div className="bg-white shadow-md rounded-lg p-8 w-full max-w-md">
         <h2 className="text-3xl font-bold text-[#1E1E2F] mb-6 text-center">Join LuxCart Today</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
+        <div>
+            <label className="block text-sm font-medium text-[#2D3748] mb-1">Name</label>
+            <input
+              className="w-full px-4 py-2 border border-[#A0AEC0] rounded-md focus:outline-none focus:ring-2 focus:ring-[#F4B400]"
+              type="text"
+              placeholder="Enter Name"
+              value={name}
+              onChange={handleUserName}
+              required
+            />
+          </div>
+
           <div>
             <label className="block text-sm font-medium text-[#2D3748] mb-1">Username</label>
             <input
@@ -48,13 +68,13 @@ function Register() {
           <input
             type={showPassword ? "text" : "password"}
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={handleUserPassword}
             placeholder="Enter password"
             className="w-full px-4 pr-10 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <span
             className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 cursor-pointer"
-            onClick={() => setShowPassword(!showPassword)}
+            onClick={togglePassword}
           >
             {showPassword ? <AiOutlineEyeInvisible size={20} /> : <AiOutlineEye size={20} />}
           </span>
