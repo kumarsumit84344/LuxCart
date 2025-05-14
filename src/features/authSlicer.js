@@ -17,6 +17,7 @@ const authSlicer = createSlice({
     setname: (state, action) => {
       state.name = action.payload;
       localStorage.setItem('name', action.payload);
+      console.log("Test")
     },
     setlogin: (state, action) => {
       state.user = action.payload;
