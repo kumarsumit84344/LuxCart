@@ -32,7 +32,9 @@ function ProductDetails() {
               <img src={p.images[0]} alt={p.title} className="w-full h-60 object-cover rounded-md mb-2" />
               <h2 className="text-lg font-semibold">{p.title}</h2>
               {/* {p.description.length > 100 ? p.description.slice(0, 100) + "..." : p.description} */}
-              <p className="text-accent font-bold mt-2">${p.price}</p>
+              <p className="text-accent font-bold mt-2">
+  ₹{Math.round(p.price * 83).toLocaleString('en-IN')}
+</p>
               <button
                 className="bg-[#F4B400] text-white py-1 px-4 rounded mt-2 hover:bg-yellow-600"
                 onClick={() => handleAddToCart(p)}
