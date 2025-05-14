@@ -43,28 +43,28 @@ function Header() {
         {isloggin && <img
           src="https://i.pravatar.cc/40" // Replace with user's avatar if available
           alt="User Avatar"
-          className="w-10 h-10 rounded-full"
+          className="w-8 h-8 sm:w-10 sm:h-10 rounded-full"
         />}
-      <span className="text-[#2D3748] font-bold uppercase tracking-wider text-sm">{name}</span>
+      <span className="text-[10px] sm:text-sm text-[#2D3748] font-bold uppercase tracking-wider">{name}</span>
       </div>
 
       {!isloggin && <button
         onClick={handleLogin} // define this function
-        className="bg-[#F4B400] text-white px-4 py-2 rounded hover:bg-yellow-500 transition"
+        className="text-xs sm:text-sm bg-[#F4B400] text-white px-2 py-1 sm:px-4 sm:py-2 rounded hover:bg-yellow-500 transition"
       >
         Login
       </button>}
       
       {isloggin && <button
         onClick={handleLogout} // define this function
-        className="bg-[#F4B400] text-white px-4 py-2 rounded hover:bg-yellow-500 transition"
+        className="text-xs sm:text-sm bg-[#F4B400] text-white px-2 py-1 sm:px-4 sm:py-2 rounded hover:bg-yellow-500 transition"
       >
         Logout
       </button>}
       
       {!isloggin &&  <button
         onClick={handleRegister} // define this function
-        className="bg-[#F4B400] text-white px-4 py-2 rounded hover:bg-yellow-500 transition"
+        className="text-xs sm:text-sm bg-[#F4B400] text-white px-2 py-1 sm:px-4 sm:py-2 rounded hover:bg-yellow-500 transition"
       >
         Register
       </button>}
