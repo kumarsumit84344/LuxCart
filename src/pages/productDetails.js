@@ -2,6 +2,9 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../services/api";
 import {addToCart} from "../features/cartslicer"
+import {removeFromCart } from "../features/cartslicer";
+
+
 
 function ProductDetails() {
   const dispatch = useDispatch();
@@ -16,6 +19,15 @@ function ProductDetails() {
     dispatch(addToCart(product));
   };
 
+  const cartItems = useSelector((state) => state.cart.cartItems); // select from cart
+
+  const getQuantity = (id) => {
+    if (!cartItems || !Array.isArray(cartItems)) return 0;
+    const item = cartItems.find((item) => item.id === id);
+    return item?.quantity || 0;
+  };
+
+
   return (
     <div className="bg-[#F7FAFC] text-[#2D3748] min-h-screen p-4">
      {(loading || error) && (
@@ -25,7 +37,7 @@ function ProductDetails() {
   </div>
 )}
 
-      <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-3 pt-24">
+      <ul className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 pt-24">
         {product.length > 0 ? (
           product.map((p) => (
             <li key={p.id} className="bg-white shadow-md p-4 rounded-lg border border-gray-200">
@@ -35,12 +47,31 @@ function ProductDetails() {
               <p className="text-accent font-bold mt-2">
   ₹{Math.round(p.price * 83).toLocaleString('en-IN')}
 </p>
-              <button
-                className="bg-[#F4B400] text-white py-1 px-4 rounded mt-2 hover:bg-yellow-600"
-                onClick={() => handleAddToCart(p)}
-              >
-                Add to Cart
-              </button>
+{getQuantity(p.id) === 0 ? (
+  <button
+  className="bg-[#F4B400] text-white text-sm py-1 px-4 rounded mt-2 hover:bg-yellow-600 w-full"
+    onClick={() => handleAddToCart(p)}
+  >
+    Add to Cart
+  </button>
+) : (
+  <div className="flex items-center justify-between mt-2 border rounded px-2 py-1 w-full">
+    <button
+      className="bg-gray-300 text-black px-3 py-1 rounded hover:bg-gray-400"
+      onClick={() => dispatch(removeFromCart(p))}
+    >
+      -
+    </button>
+    <span className="text-lg font-semibold">{getQuantity(p.id)}</span>
+    <button
+      className="bg-[#F4B400] text-white px-3 py-1 rounded hover:bg-yellow-600"
+      onClick={() => handleAddToCart(p)}
+    >
+      +
+    </button>
+  </div>
+)}
+
             </li>
           ))
         ) : (

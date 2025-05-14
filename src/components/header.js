@@ -10,7 +10,6 @@ function Header() {
   const isloggin = useSelector((state) => state.auth.isloggin);
   const dispatch= useDispatch();
   const navigate = useNavigate();
-  console.log(name)
   
   const handleLogout = () => {
     dispatch(setlogout());

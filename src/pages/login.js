@@ -29,8 +29,6 @@ function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
     const storedUserData = JSON.parse(localStorage.getItem('userdata'));
-    console.log(storedUserData.user,storedUserData.password)
-    console.log(user,password)
     if (user == storedUserData.username&& password == storedUserData.password) {
       dispatch(setlogin(user))
       dispatch(setname(storedUserData.name))
