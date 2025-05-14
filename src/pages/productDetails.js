@@ -49,7 +49,7 @@ function ProductDetails() {
 </p>
 {getQuantity(p.id) === 0 ? (
   <button
-  className="bg-[#F4B400] text-white text-sm py-1 px-4 rounded mt-2 hover:bg-yellow-600 w-full"
+  className="text-xs sm:text-sm bg-[#F4B400] text-white py-1 sm:py-1.5 px-3 sm:px-4 rounded mt-2 hover:bg-yellow-600 w-full"
     onClick={() => handleAddToCart(p)}
   >
     Add to Cart
