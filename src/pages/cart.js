@@ -1,9 +1,11 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { addToCart, removeFromCart } from "../features/cartslicer";
+import { useNavigate } from "react-router-dom";
 
 function Cart() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const cartItems = useSelector((state) => state.cart.cartItems);
 
   const handleAdd = (item) => {
@@ -76,7 +78,7 @@ function Cart() {
               ₹{Math.round(getTotalPrice() * 83).toLocaleString("en-IN")}
             </span>
           </p>
-          <button className="mt-4 w-full bg-[#1E1E2F] text-white py-2 rounded-lg hover:bg-[#2b2b44]">
+          <button className="mt-4 w-full bg-[#1E1E2F] text-white py-2 rounded-lg hover:bg-[#2b2b44]" onClick={()=>navigate('/checkout')}>
             Proceed to Checkout
           </button>
         </div>
