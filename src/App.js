@@ -9,6 +9,7 @@ import NotFound from './pages/notFound';
 import ProductDetails from './pages/productDetails';
 import ProtectedRoute from './Routes/route';
 import Footer from './components/footer';
+import Cart from './pages/cart';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
             </ProtectedRoute>
           }
         />
+        <Route path='/cart' element={<Cart/>}/>
         <Route path='*' element={<NotFound />} />
       </Routes>
       <Footer/>
